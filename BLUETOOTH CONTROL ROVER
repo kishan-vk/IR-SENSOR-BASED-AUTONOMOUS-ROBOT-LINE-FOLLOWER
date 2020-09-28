@@ -1,0 +1,54 @@
+Program
+
+int motorA1 = 10;
+int motorA2 = 11;
+int motorB1 = 5;
+int motorB2 = 6;
+int vel = 255;
+int state = '0';
+void setup() {
+Serial.begin(9600);
+pinMode(motorA1, OUTPUT);
+pinMode(motorA2, OUTPUT);
+pinMode(motorB1, OUTPUT);
+pinMode(motorB2, OUTPUT);
+}
+void loop() {
+if(Serial.available()>0){
+state = Serial.read();
+}
+if(state=='F'){ // Forward
+Serial.println(state);
+analogWrite(motorA1, vel);
+analogWrite(motorA2, 0);
+analogWrite(motorB1, vel);
+analogWrite(motorB2, 0);
+}
+if(state=='B'){ // Reverse
+Serial.println(state);
+analogWrite(motorA1, 0);
+analogWrite(motorA2, vel);
+analogWrite(motorB1, 0);
+analogWrite(motorB2, vel);
+}
+if(state=='R'){ // Right
+Serial.println(state);
+analogWrite(motorA1, vel);
+analogWrite(motorA2, 0);
+analogWrite(motorB1, 0);
+analogWrite(motorB2, vel);
+}
+if(state=='L'){ // Left
+Serial.println(state);
+analogWrite(motorA1, 0);
+analogWrite(motorA2, vel);
+analogWrite(motorB1, vel);
+analogWrite(motorB2, 0);
+}
+if(state=='S'){ // Stop
+Serial.println(state);
+analogWrite(motorA1, 0);
+analogWrite(motorA2, 0);
+analogWrite(motorB1, 0);
+analogWrite(motorB2, 0);
+}
